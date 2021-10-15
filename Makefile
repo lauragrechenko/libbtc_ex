@@ -24,15 +24,15 @@ LDFLAGS += c_src/libbtc/.libs/libbtc.a
 
 .PHONY: clean
 
-all: priv/libbtc_nif.so
+all: priv/libbtc_ex_nif.so
 
-priv/libbtc_nif.so: c_src/libbtc_nif.c
+priv/libbtc_nif.so: c_src/libbtc_ex_nif.c
 	c_src/build_deps.sh
-	$(CC) $(CFLAGS) -shared -o $@ c_src/libbtc_nif.c $(LDFLAGS)
+	$(CC) $(CFLAGS) -shared -o $@ c_src/libbtc_ex_nif.c $(LDFLAGS)
 
 clean:
 	$(MIX) clean
 	c_src/build_deps.sh clean
 	$(MAKE) -C $(LIB_PATH) clean
-	$(RM) priv/libbtc_nif.so
+	$(RM) priv/libbtc_ex_nif.so
 
