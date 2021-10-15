@@ -121,8 +121,7 @@ static ERL_NIF_TERM derive_nif(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv
 
 
             if (!hd_derive(chain, pkey, keypathnew, newextkey, sizeout))
-                //return showError("Deriving child key failed\n");
-	            return error_result(env, "Deriving child key failed\n");
+	            return error_result(env, "Key derivation error");
             else {
                 size_t result_len = strlen(newextkey); 
                 output = enif_make_new_binary(env, result_len, &result);
@@ -134,8 +133,7 @@ static ERL_NIF_TERM derive_nif(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv
     }
     else {
         if (!hd_derive(chain, pkey, keypath, newextkey, sizeout))
-            //return showError("Deriving child key failed\n");
-	        return error_result(env, "Deriving child key failed\n");
+	        return error_result(env, "Key derivation error");
         else{
             size_t result_len = strlen(newextkey); 
             output = enif_make_new_binary(env, result_len, &result);
