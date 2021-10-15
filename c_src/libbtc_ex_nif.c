@@ -8,20 +8,6 @@
 #include "tool.h"
 #include "chainparams.h"
 
-const btc_chainparams btc_chainparams_main = {
-    "main",
-    0x00,
-    0x05,
-    "bc",
-    0x80,
-    0x0488ADE4,
-    0x0488B21E,
-    {0xf9, 0xbe, 0xb4, 0xd9},
-    {0x6f, 0xe2, 0x8c, 0x0a, 0xb6, 0xf1, 0xb3, 0x72, 0xc1, 0xa6, 0xa2, 0x46, 0xae, 0x63, 0xf7, 0x4f, 0x93, 0x1e, 0x83, 0x65, 0xe1, 0x5a, 0x08, 0x9c, 0x68, 0xd6, 0x19, 0x00, 0x00, 0x00, 0x00, 0x00},
-    8333,
-    {{"seed.bitcoin.jonasschnelli.ch"}, 0},
-};
-
 static ERL_NIF_TERM error_result(ErlNifEnv* env, char* error_msg);
 static ERL_NIF_TERM ok_result(ErlNifEnv* env, ERL_NIF_TERM *r);
 
@@ -71,8 +57,16 @@ static ERL_NIF_TERM derive_nif(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv
     
     char* keypath = (char*)(path.data);
     char* pkey = (char*)root_key.data; 
- 	
-    const btc_chainparams* chain = &btc_chainparams_main;
+    
+    btc_chainparams* chain = &btc_chainparams_main;
+    
+    if (strncmp(pkey, "tprv", 4) == 0) {
+     chain = &btc_chainparams_test; 
+    } else if (strncmp(pkey, "xprv", 4) == 0) {
+     chain = &btc_chainparams_main;
+    } else
+       return enif_make_badarg(env);
+
 
     static char digits[] = "0123456789";
     for (unsigned int i = 0; i<strlen(keypath); i++) {
