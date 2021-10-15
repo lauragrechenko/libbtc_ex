@@ -133,6 +133,7 @@ static ERL_NIF_TERM derive_nif(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv
             else {
                 memcpy(output, newextkey, sizeout); 
                 //hd_print_node(chain, newextkey);
+	            return ok_result(env, &result);
             }
         }
     }
@@ -143,10 +144,9 @@ static ERL_NIF_TERM derive_nif(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv
         else{
             memcpy(output, newextkey, sizeout); 
             //hd_print_node(chain, newextkey);
+	        return ok_result(env, &result);
         }
     }
-
-   return result;
 }
 
 static ERL_NIF_TERM error_result(ErlNifEnv* env, char* error_msg)
