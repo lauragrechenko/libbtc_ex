@@ -26,7 +26,7 @@ LDFLAGS += c_src/libbtc/.libs/libbtc.a
 
 all: priv/libbtc_ex_nif.so
 
-priv/libbtc_nif.so: c_src/libbtc_ex_nif.c
+priv/libbtc_ex_nif.so: c_src/libbtc_ex_nif.c
 	c_src/build_deps.sh
 	$(CC) $(CFLAGS) -shared -o $@ c_src/libbtc_ex_nif.c $(LDFLAGS)
 
