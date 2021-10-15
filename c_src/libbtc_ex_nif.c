@@ -140,4 +140,4 @@ static ErlNifFunc nif_funcs[] = {
     {"derive", 2, derive_nif},
 };
 
-ERL_NIF_INIT(libbtc, nif_funcs, NULL, NULL, NULL, NULL)
+ERL_NIF_INIT(libbtc_ex, nif_funcs, NULL, NULL, NULL, NULL)

@@ -23,7 +23,7 @@ defmodule Libbtc_ex.Mixfile do
           "Makefile",
           "README.md",
           "c_src/build_deps.sh",
-          "c_src/libbtc_nif.c",
+          "c_src/libbtc_ex_nif.c",
           "mix.exs",
           "src/libbtc.erl"
         ],
