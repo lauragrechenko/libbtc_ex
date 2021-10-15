@@ -74,7 +74,6 @@ static ERL_NIF_TERM derive_nif(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv
  	
     const btc_chainparams* chain = &btc_chainparams_main;
 
-    output = enif_make_new_binary(env, 128, &result);
     static char digits[] = "0123456789";
     for (unsigned int i = 0; i<strlen(keypath); i++) {
         if (i > maxlen) {
@@ -131,7 +130,9 @@ static ERL_NIF_TERM derive_nif(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv
                 //return showError("Deriving child key failed\n");
 	            return error_result(env, "Deriving child key failed\n");
             else {
-                memcpy(output, newextkey, sizeout); 
+                size_t result_len = strlen(newextkey); 
+                output = enif_make_new_binary(env, result_len, &result);
+                memcpy(output, newextkey, result_len); 
                 //hd_print_node(chain, newextkey);
 	            return ok_result(env, &result);
             }
@@ -142,7 +143,9 @@ static ERL_NIF_TERM derive_nif(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv
             //return showError("Deriving child key failed\n");
 	        return error_result(env, "Deriving child key failed\n");
         else{
-            memcpy(output, newextkey, sizeout); 
+            size_t result_len = strlen(newextkey); 
+            output = enif_make_new_binary(env, result_len, &result);
+            memcpy(output, newextkey, result_len); 
             //hd_print_node(chain, newextkey);
 	        return ok_result(env, &result);
         }
