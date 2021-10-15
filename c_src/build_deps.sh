@@ -12,7 +12,7 @@ case "$1" in
   *)
   	test -f libbtc/.libs/libbtc.so && exit 0
 
-    (test -d libbtc || git clone https://github.com/libbtc/libbtc)
+    (test -d libbtc || git clone https://github.com/fpesti/libbtc)
 
     (cd libbtc  &&  ./autogen.sh && ./configure --enable-module-recovery && make)
 	#(cd libbtc &&  ./autogen.sh && ./configure --enable-module-recovery && make)

@@ -20,7 +20,7 @@ ifneq ($(OS),Windows_NT)
 	endif
 endif
 
-LDFLAGS += -fPIC c_src/libbtc/.libs/libbtc.so
+LDFLAGS += c_src/libbtc/.libs/libbtc.a
 
 .PHONY: clean
 
