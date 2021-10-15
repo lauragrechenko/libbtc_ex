@@ -3,7 +3,7 @@
 -on_load(init/0).
 
 -define(APPNAME, libbtc_ex).
--define(LIBNAME, libbtc_nif).
+-define(LIBNAME, libbtc_ex_nif).
 
 init() ->
     io:format ("Init started~n"),
