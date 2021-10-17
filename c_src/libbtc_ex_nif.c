@@ -59,9 +59,9 @@ static ERL_NIF_TERM derive_nif(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv
     }
     
     memcpy(keypath, path.data, path.size);
-    keypath[path.size + 1]='\0';
+    keypath[path.size]='\0';
     memcpy(pkey, root_key.data, root_key.size); 
-    pkey[root_key.size + 1]='\0';
+    pkey[root_key.size]='\0';
     
     btc_chainparams* chain = &btc_chainparams_main;
     
