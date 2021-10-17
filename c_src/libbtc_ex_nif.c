@@ -45,18 +45,23 @@ static ERL_NIF_TERM derive_nif(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv
     uint64_t to = 0;
 	
     size_t sizeout = 128;
+    
     char newextkey[sizeout];
+    char keypath[sizeout];
+    char pkey[sizeout];
 
-    if (!enif_inspect_binary(env, argv[0], &root_key)) {
+    if (!enif_inspect_binary(env, argv[0], &root_key) || root_key.size > sizeout-1) {
        return enif_make_badarg(env);
     }
 
-	if (!enif_inspect_binary(env, argv[1], &path)) {
+	if (!enif_inspect_binary(env, argv[1], &path) || path.size > sizeout-1) {
        return enif_make_badarg(env);
     }
     
-    char* keypath = (char*)(path.data);
-    char* pkey = (char*)root_key.data; 
+    memcpy(keypath, path.data, path.size);
+    keypath[path.size + 1]='\0';
+    memcpy(pkey, root_key.data, root_key.size); 
+    pkey[root_key.size + 1]='\0';
     
     btc_chainparams* chain = &btc_chainparams_main;
     
@@ -66,7 +71,6 @@ static ERL_NIF_TERM derive_nif(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv
      chain = &btc_chainparams_main;
     } else
        return enif_make_badarg(env);
-
 
     static char digits[] = "0123456789";
     for (unsigned int i = 0; i<strlen(keypath); i++) {
