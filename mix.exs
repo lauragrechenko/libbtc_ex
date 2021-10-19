@@ -25,7 +25,7 @@ defmodule Libbtc_ex.Mixfile do
           "c_src/build_deps.sh",
           "c_src/libbtc_ex_nif.c",
           "mix.exs",
-          "src/libbtc.erl"
+          "src/libbtc_ex.erl"
         ],
       ],
       compilers: [:make_bindings, :erlang, :app],
